@@ -6,8 +6,11 @@ public class Controller : MonoBehaviour {
 	public bool player;
 	public GameObject floor;
 	
+	private Vector3 start;
+	
 	void Awake () {
-		floor = GameObject.Find("Floor");	
+		floor = GameObject.Find("Floor");
+		start = transform.transform.position;
 	}
 	
 	// Update is called once per frame
@@ -37,5 +40,9 @@ public class Controller : MonoBehaviour {
 				transform.position += Vector3.right;	
 			}	
 		} 
+	}
+	
+	void Reset() {
+		transform.position = start;	
 	}
 }

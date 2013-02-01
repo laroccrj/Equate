@@ -46,6 +46,7 @@ public class Spawner : MonoBehaviour {
 			
 			if (!spaces[randomX, randomZ]) {
 				playerSpawned = (GameObject)Instantiate(Player, new Vector3(randomX, 1, randomZ), floor.transform.rotation);
+				playerSpawned.name = "Player";
 				spaces[randomX, randomZ] = true;
 				spawned = true;
 			}
@@ -60,6 +61,7 @@ public class Spawner : MonoBehaviour {
 			
 			if (!spaces[randomX, randomZ]) {
 				shadowSpawned = (GameObject)Instantiate(Shadow, new Vector3(randomX, 1, randomZ), floor.transform.rotation);
+				shadowSpawned.name = "Shadow";
 				spaces[randomX, randomZ] = true;
 				spawned = true;
 			}
@@ -122,8 +124,10 @@ public class Spawner : MonoBehaviour {
 			
 		}
 		
-		Instantiate(PlayerGoal, playerSpawned.transform.position, floor.transform.rotation);
-		Instantiate(ShadowGoal, shadowSpawned.transform.position, floor.transform.rotation);
+		GameObject playerGoal = (GameObject)Instantiate(PlayerGoal, playerSpawned.transform.position, floor.transform.rotation);
+		GameObject shadowGoal = (GameObject)Instantiate(ShadowGoal, shadowSpawned.transform.position, floor.transform.rotation);
+		playerGoal.name = "PGoal";
+		shadowGoal.name = "SGoal";
 		
 		playerSpawned.transform.position = playerSpot;
 		shadowSpawned.transform.position = shadowSpot;

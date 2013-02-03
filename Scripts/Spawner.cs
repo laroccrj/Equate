@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour {
 	public GameObject Shadow;
 	public GameObject PlayerGoal;
 	public GameObject ShadowGoal;
+	public ArrayList PlayerMoves = new ArrayList();
 	public int wallChance;
 	public int distance;
 	
@@ -81,6 +82,7 @@ public class Spawner : MonoBehaviour {
 				case 0:
 					if(!Physics.Raycast(playerSpawned.transform.position, Vector3.forward, 1) && playerSpawned.transform.position.z < (int)floor.transform.localScale.z - 1) {
 						playerSpawned.transform.position += Vector3.forward;
+						PlayerMoves.Add(Vector3.forward);
 					}
 				
 					if(!Physics.Raycast(shadowSpawned.transform.position, Vector3.back, 1) && shadowSpawned.transform.position.z > 0) {
@@ -91,6 +93,7 @@ public class Spawner : MonoBehaviour {
 				case 1:
 					if(!Physics.Raycast(playerSpawned.transform.position, Vector3.back, 1) && playerSpawned.transform.position.z > 0) {
 						playerSpawned.transform.position += Vector3.back;
+						PlayerMoves.Add(Vector3.back);
 					}
 				
 					if(!Physics.Raycast(shadowSpawned.transform.position, Vector3.forward, 1) && shadowSpawned.transform.position.z < (int)floor.transform.localScale.z - 1) {
@@ -101,6 +104,7 @@ public class Spawner : MonoBehaviour {
 				case 2:
 					if(!Physics.Raycast(playerSpawned.transform.position, Vector3.right, 1) && playerSpawned.transform.position.x < (int)floor.transform.localScale.x - 1) {
 						playerSpawned.transform.position += Vector3.right;
+						PlayerMoves.Add(Vector3.right);
 					}
 				
 					if(!Physics.Raycast(shadowSpawned.transform.position, Vector3.left, 1) && shadowSpawned.transform.position.x > 0) {
@@ -111,6 +115,7 @@ public class Spawner : MonoBehaviour {
 				case 3:
 					if(!Physics.Raycast(playerSpawned.transform.position, Vector3.left, 1) && playerSpawned.transform.position.x > 0) {
 						playerSpawned.transform.position += Vector3.left;
+						PlayerMoves.Add(Vector3.left);
 					}
 				
 					if(!Physics.Raycast(shadowSpawned.transform.position, Vector3.right, 1) && shadowSpawned.transform.position.x < (int)floor.transform.localScale.x - 1) {

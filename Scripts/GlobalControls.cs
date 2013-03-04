@@ -9,10 +9,14 @@ public class GlobalControls : MonoBehaviour {
 	public GUIStyle pauseStyle;
 	public bool paused;
 	public bool solving = false;
+	public GameObject player;
+	public GameObject shadow;
 	
 	void Awake () {
 		playerGoal = (Goal)GameObject.Find("PGoal").GetComponent(typeof(Goal));
 		shadowGoal = (Goal)GameObject.Find("SGoal").GetComponent(typeof(Goal));
+		player = GameObject.Find("Player");
+		shadow = GameObject.Find("Shadow");
 		spawner = (Spawner)gameObject.GetComponent(typeof(Spawner));
 	}
 	
@@ -21,9 +25,8 @@ public class GlobalControls : MonoBehaviour {
 			//reset the level
 			
 			GameObject[] gameObjects = FindObjectsOfType(typeof(GameObject)) as GameObject[];
-	        foreach (GameObject gameObject in gameObjects) {
+	        foreach (GameObject gameObject in gameObjects)
 	            gameObject.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
-	        }
 		}
 		
 		//Player wins
@@ -33,10 +36,7 @@ public class GlobalControls : MonoBehaviour {
 		
 		//Pause the game
 		if(Input.GetKeyDown("p")) {
-			if(paused) 
-				paused = false;
-			else
-				paused = true;
+			paused = !paused;
 		}
 	}
 	
@@ -54,7 +54,8 @@ public class GlobalControls : MonoBehaviour {
 	            Application.LoadLevel(Application.loadedLevelName);	
 			
 			if (GUI.Button(new Rect(midX, midY, 100, 30), "Solve"))
-	            Solve();
+				Solve ();
+				
 		}
         
     }
@@ -64,6 +65,9 @@ public class GlobalControls : MonoBehaviour {
 	}
 	
 	void Solve() {
-		Debug.Log(spawner.PlayerMoves[0]);
+		solving = true;
+		paused = false;
+		player.SendMessage("Reset");
+		shadow.SendMessage("Reset");
 	}
 }
